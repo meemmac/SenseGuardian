@@ -1,7 +1,7 @@
 export function Logo({ size = 'md', variant = 'light', className = "" }) {
   const sizeClasses = {
-    sm: { text: 'text-lg', icon: 'w-5 h-5' },
-    md: { text: 'text-2xl', icon: 'w-7 h-7' },
+    sm: { text: 'text-lg', icon: 'w-6 h-6' },
+    md: { text: 'text-2xl', icon: 'w-8 h-8' },
     lg: { text: 'text-3xl', icon: 'w-10 h-10' },
     xl: { text: 'text-4xl', icon: 'w-12 h-12' }
   };
@@ -14,9 +14,22 @@ export function Logo({ size = 'md', variant = 'light', className = "" }) {
   const leafColor = variant === 'light' ? '#ffffff' : '#84cc7e';
 
   return (
-    <div className={`flex items-center space-x-2 ${className}`}>
+    <div className={`flex flex-col items-center text-center ${className}`}>
+      {/* SenseGuardian Text */}
+      <div className="mb-2">
+        <span 
+          className={`font-bold leading-tight ${sizeClasses[size].text} ${colorClasses[variant]}`}
+          style={{ 
+            textShadow: variant === 'light' ? '0 2px 4px rgba(0,0,0,0.3)' : 'none',
+            filter: variant === 'light' ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none'
+          }}
+        >
+          SenseGuardian
+        </span>
+      </div>
+      
+      {/* Leaf Icon Below */}
       <div className="relative">
-        {/* Leaf Icon */}
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -36,32 +49,17 @@ export function Logo({ size = 'md', variant = 'light', className = "" }) {
         ></div>
       </div>
       
-      <div className="flex flex-col">
+      {/* Subtitle for larger sizes */}
+      {size === 'lg' || size === 'xl' ? (
         <span 
-          className={`font-bold leading-tight ${sizeClasses[size].text} ${colorClasses[variant]}`}
+          className={`text-xs mt-1 ${variant === 'light' ? 'text-white/80' : 'text-gray-600'} tracking-wider uppercase`}
           style={{ 
-            textShadow: variant === 'light' ? '0 2px 4px rgba(0,0,0,0.3)' : 'none',
-            filter: variant === 'light' ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none'
+            textShadow: variant === 'light' ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'
           }}
         >
-          Sense<span 
-            style={{ 
-              color: variant === 'light' ? '#ffffff' : '#84cc7e',
-              textShadow: variant === 'light' ? '0 2px 4px rgba(0,0,0,0.4)' : 'none'
-            }}
-          >Guardian</span>
+          Sensor Monitoring
         </span>
-        {size === 'lg' || size === 'xl' ? (
-          <span 
-            className={`text-xs ${variant === 'light' ? 'text-white/80' : 'text-gray-600'} tracking-wider uppercase`}
-            style={{ 
-              textShadow: variant === 'light' ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'
-            }}
-          >
-            Sensor Monitoring
-          </span>
-        ) : null}
-      </div>
+      ) : null}
     </div>
   );
 }
