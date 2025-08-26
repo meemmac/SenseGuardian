@@ -6,16 +6,17 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <TinyGPSPlus.h>
+#include <HardwareSerial.h>
 
 // ===== WiFi Credentials =====
-const char* ssid = "Milton";
-const char* password = "01713754958";
+const char* ssid = "wifi_name";
+const char* password = "wifi_password";
 
 // ===== Objects =====
 Adafruit_MPU6050 mpu;
 MAX30105 particleSensor;
 TinyGPSPlus gps;
-HardwareSerial gpsSerial(1);  // UART1 for GPS
+HardwareSerial SerialGPS(2); // UART2 for GPS
 
 WebServer server(80);
 
@@ -438,7 +439,7 @@ void setup() {
   pinMode(15, INPUT);
 
   // GPS (Neo-6M on UART1, RX=16, TX=17)
-  gpsSerial.begin(9600, SERIAL_8N1, 16, 17);
+ SerialGPS.begin(9600, SERIAL_8N1, 16, 17);
 
   // Web routes
   server.on("/", [](){ server.send(200,"text/html",htmlPage); });
@@ -477,11 +478,12 @@ void loop() {
   soundLevel = soundDetected ? 80 : 20; // simple % scale
 
   // GPS
-  while(gpsSerial.available()){ gps.encode(gpsSerial.read()); }
+  while(SerialGPS.available() > 0){gps.encode(SerialGPS.read());
   if(gps.location.isUpdated()){
     latitude=gps.location.lat();
     longitude=gps.location.lng();
     satellites=gps.satellites.value();
+  }
   }
 
   server.handleClient();
