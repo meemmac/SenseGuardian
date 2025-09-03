@@ -3,7 +3,6 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
-#include <WebServer.h>
 #include <Wire.h>
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
@@ -26,7 +25,6 @@ TinyGPSPlus gps;
 HardwareSerial SerialGPS(2); // UART2 for GPS
 HTTPClient http;
 
-WebServer server(80);
 
 // ===== Variables =====
 float ax, ay, az, gx, gy, gz;
