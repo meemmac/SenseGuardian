@@ -14,21 +14,8 @@ export function Logo({ size = 'md', variant = 'light', className = "" }) {
   const leafColor = variant === 'light' ? '#ffffff' : '#84cc7e';
 
   return (
-    <div className={`flex flex-col items-center text-center ${className}`}>
-      {/* SenseGuardian Text */}
-      <div className="mb-2">
-        <span 
-          className={`font-bold leading-tight ${sizeClasses[size].text} ${colorClasses[variant]}`}
-          style={{ 
-            textShadow: variant === 'light' ? '0 2px 4px rgba(0,0,0,0.3)' : 'none',
-            filter: variant === 'light' ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none'
-          }}
-        >
-          SenseGuardian
-        </span>
-      </div>
-      
-      {/* Leaf Icon Below */}
+    <div className={`flex items-center space-x-3 ${className}`}>
+      {/* Leaf Icon Beside */}
       <div className="relative">
         <svg
           viewBox="0 0 24 24"
@@ -49,17 +36,30 @@ export function Logo({ size = 'md', variant = 'light', className = "" }) {
         ></div>
       </div>
       
-      {/* Subtitle for larger sizes */}
-      {size === 'lg' || size === 'xl' ? (
+      {/* SenseGuardian Text */}
+      <div className="flex flex-col">
         <span 
-          className={`text-xs mt-1 ${variant === 'light' ? 'text-white/80' : 'text-gray-600'} tracking-wider uppercase`}
+          className={`font-bold leading-tight ${sizeClasses[size].text} ${colorClasses[variant]}`}
           style={{ 
-            textShadow: variant === 'light' ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'
+            textShadow: variant === 'light' ? '0 2px 4px rgba(0,0,0,0.3)' : 'none',
+            filter: variant === 'light' ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' : 'none'
           }}
         >
-          Sensor Monitoring
+          SenseGuardian
         </span>
-      ) : null}
+        
+        {/* Subtitle for larger sizes */}
+        {size === 'lg' || size === 'xl' ? (
+          <span 
+            className={`text-xs mt-1 ${variant === 'light' ? 'text-white/80' : 'text-gray-600'} tracking-wider uppercase`}
+            style={{ 
+              textShadow: variant === 'light' ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'
+            }}
+          >
+            Sensor Monitoring
+          </span>
+        ) : null}
+      </div>
     </div>
   );
 }
